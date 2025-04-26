@@ -27,10 +27,12 @@ public class TwoFourTree
         treeRoot = root;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public boolean isEmpty() {
         return (size == 0);
     }
@@ -40,6 +42,7 @@ public class TwoFourTree
      * @param key to be searched for
      * @return object corresponding to key; null if not found
      */
+    @Override
     public Object findElement(Object key) {
         return null;
     }
@@ -49,6 +52,7 @@ public class TwoFourTree
      * @param key of object to be inserted
      * @param element to be inserted
      */
+    @Override
     public void insertElement(Object key, Object element) {
     }
 
@@ -59,6 +63,7 @@ public class TwoFourTree
      * @return object corresponding to key
      * @exception ElementNotFoundException if the key is not in dictionary
      */
+    @Override
     public Object removeElement(Object key) throws ElementNotFoundException {
         return null;
     }
