@@ -54,7 +54,7 @@ public class TwoFourTree implements Dictionary {
             }
             temp = temp.getChild(i);
         }
-        return null;
+        return null;//may need to change
     }
 
     /**
