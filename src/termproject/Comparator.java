@@ -11,7 +11,7 @@ package termproject;
 
 public interface Comparator {
 
-    public boolean isLessThan7 (Object obj1, Object obj2);
+    public boolean isLessThan8 (Object obj1, Object obj2);
 
     public boolean isLessThanOrEqualTo (Object obj1, Object obj2);
 
