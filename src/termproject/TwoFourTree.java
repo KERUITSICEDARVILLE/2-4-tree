@@ -43,6 +43,17 @@ public class TwoFourTree implements Dictionary {
      */
     @Override
     public Object findElement(Object key) {
+        TFNode temp = treeRoot;
+        while(temp != null){
+            int i = 0;
+            while(i < temp.getNumItems() && treeComp.isGreaterThan(key, (temp.getItem(i)).key())){
+                ++i;
+                }
+            if(treeComp.isEqual(key, (temp.getItem(i)).key())){
+                return (temp.getItem(i)).element();
+            }
+            temp = temp.getChild(i);
+        }
         return null;
     }
 
