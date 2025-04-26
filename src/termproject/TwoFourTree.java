@@ -8,8 +8,7 @@ package termproject;
  * @author
  * @version 1.0
  */
-public class TwoFourTree
-        implements Dictionary {
+public class TwoFourTree implements Dictionary {
 
     private Comparator treeComp;
     private int size = 0;
