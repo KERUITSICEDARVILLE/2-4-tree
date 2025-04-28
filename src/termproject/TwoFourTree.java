@@ -54,7 +54,12 @@ public class TwoFourTree implements Dictionary {
             }
             temp = temp.getChild(i);
         }
-        return null;//may need to change
+/*        
+*   TODO: Implement a private helper function to make this function 
+*       return the thing that we need (AKA just null if we want check for 
+*       deletion or a a nested class that keeps track of TFNode and index
+*/
+        return null;   //WILL CHANGE 
     }
 
     /**
