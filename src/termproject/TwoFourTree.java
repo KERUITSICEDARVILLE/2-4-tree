@@ -53,8 +53,8 @@ public class TwoFourTree implements Dictionary {
                 return (temp.getItem(i)).element();
             }
             temp = temp.getChild(i); 
-            
         }
+        
 /*        
 *   TODO: Implement a private helper function to make this function 
 *       return the thing that we need (AKA just null if we want check for 
