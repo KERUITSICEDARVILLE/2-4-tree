@@ -52,7 +52,8 @@ public class TwoFourTree implements Dictionary {
             if(treeComp.isEqual(key, (temp.getItem(i)).key())){
                 return (temp.getItem(i)).element();
             }
-            temp = temp.getChild(i);
+            temp = temp.getChild(i); 
+            
         }
 /*        
 *   TODO: Implement a private helper function to make this function 
