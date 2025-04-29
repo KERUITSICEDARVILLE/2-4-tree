@@ -97,6 +97,10 @@ public class TwoFourTree implements Dictionary {
      */
     @Override
     public void insertElement(Object key, Object element) {
+        if(isEmpty()){
+            treeRoot = new TFNode();
+            //not finished
+        }
         TFNodeIndex theNode = find(key);
         if(theNode.isParent){//if key is not duplicate
             (theNode.node).insertItem(theNode.index, new Item(key, element));
