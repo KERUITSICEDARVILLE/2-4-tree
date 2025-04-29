@@ -9,6 +9,16 @@ package termproject;
  * @version 1.0
  */
 public class TwoFourTree implements Dictionary {
+    
+    private class TFNodeIndex {
+        public TFNode node;
+        public int index;
+        
+        public TFNodeIndex(TFNode n, int i){
+            node = n;
+            index = i;
+        }
+    }
 
     private Comparator treeComp;
     private int size = 0;
@@ -35,7 +45,26 @@ public class TwoFourTree implements Dictionary {
     public boolean isEmpty() {
         return (size == 0);
     }
-
+    
+    private TFNodeIndex find (Object key) {
+        TFNode temp = treeRoot;
+        while(temp != null){//stop when there are no children
+            int i = 0;
+            //find the index of the desired child
+            while(i < temp.getNumItems() && treeComp.isGreaterThan(key, (temp.getItem(i)).key())){
+                ++i;
+                }
+            //if we encounter the desired key
+            if(treeComp.isEqual(key, (temp.getItem(i)).key())){
+                TFNodeIndex result = new TFNodeIndex(temp, i);
+                return result;
+            }
+            temp = temp.getChild(i);
+        }
+        //we reached an external node without finding our key
+        return null;
+    }
+    
     /**
      * Searches dictionary to determine if key is present
      * @param key to be searched for
@@ -43,23 +72,12 @@ public class TwoFourTree implements Dictionary {
      */
     @Override
     public Object findElement(Object key) {
-        TFNode temp = treeRoot;
-        while(temp != null){
-            int i = 0;
-            while(i < temp.getNumItems() && treeComp.isGreaterThan(key, (temp.getItem(i)).key())){
-                ++i;
-                }
-            if(treeComp.isEqual(key, (temp.getItem(i)).key())){
-                return (temp.getItem(i)).element();
-            }
-            temp = temp.getChild(i);
+        TFNodeIndex theNode = find(key);
+        if(theNode != null){
+            return ((theNode.node).getItem(theNode.index)).element();
         }
-/*        
-*   TODO: Implement a private helper function to make this function 
-*       return the thing that we need (AKA just null if we want check for 
-*       deletion or a a nested class that keeps track of TFNode and index
-*/
-        return null;   //WILL CHANGE 
+        //if we do not find the desired key
+        return null;
     }
 
     /**
