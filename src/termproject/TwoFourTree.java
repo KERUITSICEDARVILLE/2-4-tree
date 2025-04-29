@@ -13,7 +13,7 @@ public class TwoFourTree implements Dictionary {
     private class TFNodeIndex {
         public TFNode node;
         public int index;
-        public boolean hasItem;//whether this is the parent of the desired node or not
+        public boolean hasItem;//if the node contains the item of interest
         
         public TFNodeIndex(TFNode n, int i, boolean b){
             node = n;
@@ -64,12 +64,12 @@ public class TwoFourTree implements Dictionary {
                 ++i;
                 }
             //if we encounter the desired key
-            if(treeComp.isEqual(key, (temp.getItem(i)).key())){
-                //we are returning the node that we care about
+            if(i < temp.getNumItems() && treeComp.isEqual(key, (temp.getItem(i)).key())){
+                //we care about the ith Item of temp
                 return new TFNodeIndex(temp, i, true);
             }
             if(temp.getChild(i) == null){
-                //we are returning the parent of the node where our key would exist, if it was there
+                //the data would be the ith child of temp, if it existed in the tree
                 return new TFNodeIndex(temp, i, false);
             }
             temp = temp.getChild(i);
@@ -88,7 +88,7 @@ public class TwoFourTree implements Dictionary {
             return ((theNode.node).getItem(theNode.index)).element();
         }
         //if we do not find the desired key
-        return null;
+        return null;//indistinguishable from the case when element is null
     }
 
     /**
@@ -105,10 +105,15 @@ public class TwoFourTree implements Dictionary {
             return;
         }
         TFNodeIndex theNode = find(key);
-        if(!theNode.hasItem){//if key is not duplicate
+        if(!theNode.hasItem){//if key is not already in the tree
             (theNode.node).insertItem(theNode.index, new Item(key, element));
-            // TODO: Balance tree. We should make a separate Balance function
-            //which balances at one node, and call it iteratively here.
+            (theNode.node).setChild(theNode.index, null);//might not be necessary
+            //balancing the tree
+            TFNode temp = theNode.node;
+            while(temp != null){
+                temp = split(temp);
+            }
+            return;
         }
         //otherwise, the key is duplicate.
         TFNode temp = theNode.node;
@@ -120,21 +125,59 @@ public class TwoFourTree implements Dictionary {
             temp = temp.getChild(0);
         }
         temp.insertItem(0, new Item(key, element));
-        // TODO: balance the tree.
+            //balancing the tree. we could probably reorganize so this is written only once
+            TFNode temp2 = theNode.node;
+            while(temp2 != null){
+                temp2 = split(temp2);
+            }
     }
     
     /**
      * 
      * @param badNode
-     * @param index 
-     * balances the tree at badNode, pushes the issue upward
+     * @param index of badNode in its parent's arrays
+     * @returns parent of the split node
+     * balances the tree at badNode, pushes the issue upward.
+     * this assumes MAXITEMS == 3 and it splits the node at index 2
      */
-    private void balance(TFNode badNode, int index){
+    private TFNode split(TFNode badNode){
         if(badNode.getNumItems() <= badNode.getMaxItems()){
             //everything is as it should be
-            return;
+            return null;
         }
-        //TODO: perform the balancing act
+        TFNode right = new TFNode();
+        right.addItem(0, badNode.getItem(3));
+        if(badNode.getChild(3) != null){
+             right.setChild(0, badNode.getChild(3));
+            (right.getChild(0)).setParent(right);
+        }
+        if(badNode.getChild(4) != null){
+            right.setChild(1, badNode.getChild(4));
+            (right.getChild(1)).setParent(right);
+        }
+        if(badNode == treeRoot){
+            treeRoot = new TFNode();
+            treeRoot.addItem(0, badNode.getItem(2));
+            treeRoot.setChild(0, badNode);
+            treeRoot.setChild(1, right);
+            right.setParent(treeRoot);
+            badNode.setParent(treeRoot);
+        }
+        else{
+            int i = 0;//index of badNode in its Parent's child array
+            while(i < (badNode.getParent()).getNumItems() &&
+                    treeComp.isGreaterThan((badNode.getItem(0)).key(), ((badNode.getParent()).getItem(i)).key())){
+                ++i;
+                }
+            badNode.getParent().insertItem(i, badNode.getItem(2));
+            badNode.getParent().setChild(i + 1, right);
+            right.setParent(badNode.getParent());
+        }
+        badNode.deleteItem(3);
+        badNode.setChild(4, null);
+        badNode.deleteItem(2);
+        badNode.setChild(3, null);
+        return badNode.getParent();
     }
 
     /**
