@@ -13,12 +13,12 @@ public class TwoFourTree implements Dictionary {
     private class TFNodeIndex {
         public TFNode node;
         public int index;
-        public boolean isParent;//whether this is the parent of the desired node or not
+        public boolean hasItem;//whether this is the parent of the desired node or not
         
         public TFNodeIndex(TFNode n, int i, boolean b){
             node = n;
             index = i;
-            isParent = b;
+            hasItem = b;
         }
     }
 
@@ -57,8 +57,8 @@ public class TwoFourTree implements Dictionary {
      */
     private TFNodeIndex find (Object key) {
         TFNode temp = treeRoot;
-        int i = 0;
-        while(temp != null){//stop when there are no children
+        while(true){//stops, if the tree is finite in length
+            int i = 0;
             //find the index of the desired child
             while(i < temp.getNumItems() && treeComp.isGreaterThan(key, (temp.getItem(i)).key())){
                 ++i;
@@ -66,13 +66,14 @@ public class TwoFourTree implements Dictionary {
             //if we encounter the desired key
             if(treeComp.isEqual(key, (temp.getItem(i)).key())){
                 //we are returning the node that we care about
+                return new TFNodeIndex(temp, i, true);
+            }
+            if(temp.getChild(i) == null){
+                //we are returning the parent of the node where our key would exist, if it was there
                 return new TFNodeIndex(temp, i, false);
             }
             temp = temp.getChild(i);
         }
-        //we reached an external node without finding our key. return the parent.
-        //I am not confident that i is the correct index to return
-        return new TFNodeIndex(temp.getParent(), i, true);
     }
     
     /**
@@ -83,7 +84,7 @@ public class TwoFourTree implements Dictionary {
     @Override
     public Object findElement(Object key) {
         TFNodeIndex theNode = find(key);
-        if(!theNode.isParent){
+        if(theNode.hasItem){
             return ((theNode.node).getItem(theNode.index)).element();
         }
         //if we do not find the desired key
@@ -104,7 +105,7 @@ public class TwoFourTree implements Dictionary {
             return;
         }
         TFNodeIndex theNode = find(key);
-        if(theNode.isParent){//if key is not duplicate
+        if(!theNode.hasItem){//if key is not duplicate
             (theNode.node).insertItem(theNode.index, new Item(key, element));
             // TODO: Balance tree. We should make a separate Balance function
             //which balances at one node, and call it iteratively here.
