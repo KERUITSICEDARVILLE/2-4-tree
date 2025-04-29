@@ -13,10 +13,12 @@ public class TwoFourTree implements Dictionary {
     private class TFNodeIndex {
         public TFNode node;
         public int index;
+        public boolean isParent;//whether this is the parent of the desired node or not
         
-        public TFNodeIndex(TFNode n, int i){
+        public TFNodeIndex(TFNode n, int i, boolean b){
             node = n;
             index = i;
+            isParent = b;
         }
     }
 
@@ -46,23 +48,30 @@ public class TwoFourTree implements Dictionary {
         return (size == 0);
     }
     
+    /**
+     * 
+     * @param key
+     * @return TFNodeIndex with parent of node containing the desired key
+     * and the index of the desired
+     */
     private TFNodeIndex find (Object key) {
         TFNode temp = treeRoot;
+        int i = 0;
         while(temp != null){//stop when there are no children
-            int i = 0;
             //find the index of the desired child
             while(i < temp.getNumItems() && treeComp.isGreaterThan(key, (temp.getItem(i)).key())){
                 ++i;
                 }
             //if we encounter the desired key
             if(treeComp.isEqual(key, (temp.getItem(i)).key())){
-                TFNodeIndex result = new TFNodeIndex(temp, i);
-                return result;
+                //we are returning the node that we care about
+                return new TFNodeIndex(temp, i, false);
             }
             temp = temp.getChild(i);
         }
-        //we reached an external node without finding our key
-        return null;
+        //we reached an external node without finding our key. return the parent.
+        //I am not confident that i is the correct index to return
+        return new TFNodeIndex(temp.getParent(), i, true);
     }
     
     /**
@@ -87,6 +96,23 @@ public class TwoFourTree implements Dictionary {
      */
     @Override
     public void insertElement(Object key, Object element) {
+        TFNodeIndex theNode = find(key);
+        if(theNode.isParent){//if key is not duplicate
+            (theNode.node).insertItem(theNode.index, new Item(key, element));
+            // TODO: Balance tree. We should make a separate Balance function
+            //which balances at one node, and call it iteratively here.
+        }
+        //otherwise, the key is duplicate.
+        TFNode temp = theNode.node;
+        temp = temp.getChild(theNode.index +1);//logic might be wrong here.
+        //we want the "right child" of the item we found.
+        
+        //left child all the way down, to get to the in-order successor
+        while(temp.getChild(0) != null){
+            temp = temp.getChild(0);
+        }
+        temp.insertItem(0, new Item(key, element));
+        // TODO: alance the tree.
     }
 
     /**
