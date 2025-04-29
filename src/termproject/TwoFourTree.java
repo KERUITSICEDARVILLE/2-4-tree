@@ -83,7 +83,7 @@ public class TwoFourTree implements Dictionary {
     @Override
     public Object findElement(Object key) {
         TFNodeIndex theNode = find(key);
-        if(theNode != null){
+        if(!theNode.isParent){
             return ((theNode.node).getItem(theNode.index)).element();
         }
         //if we do not find the desired key
