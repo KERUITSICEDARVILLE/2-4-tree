@@ -99,7 +99,9 @@ public class TwoFourTree implements Dictionary {
     public void insertElement(Object key, Object element) {
         if(isEmpty()){
             treeRoot = new TFNode();
-            //not finished
+            treeRoot.addItem(0, new Item(key, element));
+            size ++;
+            return;
         }
         TFNodeIndex theNode = find(key);
         if(theNode.isParent){//if key is not duplicate
@@ -118,6 +120,20 @@ public class TwoFourTree implements Dictionary {
         }
         temp.insertItem(0, new Item(key, element));
         // TODO: balance the tree.
+    }
+    
+    /**
+     * 
+     * @param badNode
+     * @param index 
+     * balances the tree at badNode, pushes the issue upward
+     */
+    private void balance(TFNode badNode, int index){
+        if(badNode.getNumItems() <= badNode.getMaxItems()){
+            //everything is as it should be
+            return;
+        }
+        //TODO: perform the balancing act
     }
 
     /**
@@ -193,7 +209,7 @@ public class TwoFourTree implements Dictionary {
 
         myTree.printAllElements();
         System.out.println("done");
-
+/*
         myTree = new TwoFourTree(myComp);
         final int TEST_SIZE = 10000;
 
@@ -213,7 +229,7 @@ public class TwoFourTree implements Dictionary {
                 myTree.printAllElements();
             }
         }
-        System.out.println("done");
+        System.out.println("done");*/
     }
 
     public void printAllElements() {
