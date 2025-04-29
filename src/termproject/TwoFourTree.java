@@ -112,7 +112,7 @@ public class TwoFourTree implements Dictionary {
             temp = temp.getChild(0);
         }
         temp.insertItem(0, new Item(key, element));
-        // TODO: alance the tree.
+        // TODO: balance the tree.
     }
 
     /**
