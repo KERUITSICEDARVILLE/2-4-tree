@@ -189,7 +189,14 @@ public class TwoFourTree implements Dictionary {
      */
     @Override
     public Object removeElement(Object key) throws ElementNotFoundException {
-        return null;
+        TFNodeIndex theNode = find(key);
+        if(!theNode.hasItem){
+           throw new ElementNotFoundException();
+        }
+        //TODO: actually remove the element and fix the tree
+        
+        //might be a chance of dereferencing null?
+        return ((theNode.node).getItem(theNode.index)).element();
     }
 
     public static void main(String[] args) {
