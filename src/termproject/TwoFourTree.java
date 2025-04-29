@@ -51,8 +51,9 @@ public class TwoFourTree implements Dictionary {
     /**
      * 
      * @param key
-     * @return TFNodeIndex with parent of node containing the desired key
-     * and the index of the desired
+     * @return TFNodeIndex. Either returns parent of desired node or the desired node depending
+     * on whether the key exists in the tree or not. This function assumes that the
+     * tree is nonempty.
      */
     private TFNodeIndex find (Object key) {
         TFNode temp = treeRoot;
@@ -298,3 +299,4 @@ public class TwoFourTree implements Dictionary {
 
     }
 }
+
