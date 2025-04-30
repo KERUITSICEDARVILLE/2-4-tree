@@ -73,10 +73,9 @@ public class TwoFourTree implements Dictionary {
             }
             if(temp.getChild(i) == null){
                 //the data would be the ith child of temp, if it existed in the tree
+                
+                System.out.println("Node not found!\n\nKey: " + key);
                 return new TFNodeIndex(temp, i, false);
-            }
-            if (temp.getChild(i) == null) {
-                return new TFNodeIndex(temp, i, true);
             }
             
             temp = temp.getChild(i);
@@ -208,7 +207,7 @@ public class TwoFourTree implements Dictionary {
     public Object removeElement(Object key) throws ElementNotFoundException {
         TFNodeIndex theNode = find(key);
         if(!theNode.hasItem){
-           throw new ElementNotFoundException();
+           throw new ElementNotFoundException("Threw Exception at node: " + theNode);
         }
         Item result = ((theNode.node).getItem(theNode.index));
         if(size == 1){
