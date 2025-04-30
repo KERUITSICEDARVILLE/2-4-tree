@@ -228,7 +228,7 @@ public class TwoFourTree implements Dictionary {
         
         //put in-order successor at the removal location
         TFNode temp = (theNode.node).getChild(theNode.index + 1);
-        while((temp.getItem(0)).key() != theNode.node.getItem(0).key() && temp.getChild(0) != null){//not an external node
+        while(temp.getChild(0) != null){//not an external node
             temp = temp.getChild(0);
         }
         (theNode.node).replaceItem(theNode.index, temp.getItem(0));
@@ -450,7 +450,7 @@ public class TwoFourTree implements Dictionary {
         System.out.println("done");
 
         myTree = new TwoFourTree(myComp);*/
-        final int TEST_SIZE = 400;
+        final int TEST_SIZE = 11;
 
 
         for (int i = 0; i < TEST_SIZE; i++) {
@@ -462,7 +462,7 @@ public class TwoFourTree implements Dictionary {
         System.out.println("removing");
         for (int i = 0; i < TEST_SIZE; i++) {
             System.out.println("removing " + i);
-            int out = (Integer) myTree.removeElement(i);
+            int out = (Integer) myTree.removeElement(1);
             if(i==240){
                 myTree.printAllElements();
             }
