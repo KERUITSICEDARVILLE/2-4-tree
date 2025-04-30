@@ -265,43 +265,6 @@ public class TwoFourTree implements Dictionary {
         Integer myInt19 = new Integer(51);
         myTree.insertElement(myInt19, myInt19);
 
-        
-        
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        myTree.insertElement(7, 7);
-        
         myTree.printAllElements();
         System.out.println("done");
 /*
