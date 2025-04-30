@@ -210,59 +210,59 @@ public class TwoFourTree implements Dictionary {
         Comparator myComp = new IntegerComparator();
         TwoFourTree myTree = new TwoFourTree(myComp);
 
-        Integer myInt1 = new Integer(47);
+        Integer myInt1 = 47;
         myTree.insertElement(myInt1, myInt1);
-        Integer myInt2 = new Integer(83);
+        Integer myInt2 = 83;
         myTree.insertElement(myInt2, myInt2);
-        Integer myInt3 = new Integer(22);
+        Integer myInt3 = 22;
         myTree.insertElement(myInt3, myInt3);
 
-        Integer myInt4 = new Integer(16);
+        Integer myInt4 = 16;
         myTree.insertElement(myInt4, myInt4);
 
-        Integer myInt5 = new Integer(49);
+        Integer myInt5 = 49;
         myTree.insertElement(myInt5, myInt5);
 
-        Integer myInt6 = new Integer(100);
+        Integer myInt6 = 100;
         myTree.insertElement(myInt6, myInt6);
 
-        Integer myInt7 = new Integer(38);
+        Integer myInt7 = 38;
         myTree.insertElement(myInt7, myInt7);
 
-        Integer myInt8 = new Integer(3);
+        Integer myInt8 = 3;
         myTree.insertElement(myInt8, myInt8);
 
-        Integer myInt9 = new Integer(53);
+        Integer myInt9 = 53;
         myTree.insertElement(myInt9, myInt9);
 
-        Integer myInt10 = new Integer(66);
+        Integer myInt10 = 66;
         myTree.insertElement(myInt10, myInt10);
 
-        Integer myInt11 = new Integer(19);
+        Integer myInt11 = 19;
         myTree.insertElement(myInt11, myInt11);
 
-        Integer myInt12 = new Integer(23);
+        Integer myInt12 = 23;
         myTree.insertElement(myInt12, myInt12);
 
-        Integer myInt13 = new Integer(24);
+        Integer myInt13 = 24;
         myTree.insertElement(myInt13, myInt13);
 
-        Integer myInt14 = new Integer(88);
+        Integer myInt14 = 88;
         myTree.insertElement(myInt14, myInt14);
 
-        Integer myInt15 = new Integer(1);
+        Integer myInt15 = 1;
         myTree.insertElement(myInt15, myInt15);
 
-        Integer myInt16 = new Integer(97);
+        Integer myInt16 = 97;
         myTree.insertElement(myInt16, myInt16);
 
-        Integer myInt17 = new Integer(94);
+        Integer myInt17 = 94;
         myTree.insertElement(myInt17, myInt17);
 
-        Integer myInt18 = new Integer(35);
+        Integer myInt18 = 35;
         myTree.insertElement(myInt18, myInt18);
 
-        Integer myInt19 = new Integer(51);
+        Integer myInt19 = 51;
         myTree.insertElement(myInt19, myInt19);
 
         myTree.printAllElements();
@@ -335,7 +335,7 @@ public class TwoFourTree implements Dictionary {
 
         if (start.getParent() != null) {
             TFNode parent = start.getParent();
-            int childIndex = 0;
+            int childIndex;
             for (childIndex = 0; childIndex <= parent.getNumItems(); childIndex++) {
                 if (parent.getChild(childIndex) == start) {
                     break;
