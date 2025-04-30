@@ -1,5 +1,7 @@
 package termproject;
 
+import java.util.Random;
+
 /**
  * Title:        Term Project 2-4 Trees
  * Description:
@@ -323,139 +325,14 @@ public class TwoFourTree implements Dictionary {
     public static void main(String[] args) {
         Comparator myComp = new IntegerComparator();
         TwoFourTree myTree = new TwoFourTree(myComp);
-/*
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        myTree.insertElement(12, 12);
-        
-        Integer myInt1 = 47;
-        myTree.insertElement(myInt1, myInt1);
 
-        Integer myInt2 = 83;
-        myTree.insertElement(myInt2, myInt2);
-
-        Integer myInt3 = 22;
-        myTree.insertElement(myInt3, myInt3);
-
-        Integer myInt4 = 16;
-        myTree.insertElement(myInt4, myInt4);
-
-        Integer myInt5 = 49;
-        myTree.insertElement(myInt5, myInt5);
-
-        Integer myInt6 = 100;
-        myTree.insertElement(myInt6, myInt6);
-
-        Integer myInt7 = 38;
-        myTree.insertElement(myInt7, myInt7);
-
-        Integer myInt8 = 3;
-        myTree.insertElement(myInt8, myInt8);
-       
-        Integer myInt9 = 53;
-        myTree.insertElement(myInt9, myInt9);
-
-        Integer myInt10 = 66;
-        myTree.insertElement(myInt10, myInt10);
-
-        Integer myInt11 = 19;
-        myTree.insertElement(myInt11, myInt11);
-
-        Integer myInt12 = 23;
-        myTree.insertElement(myInt12, myInt12);
-
-        Integer myInt13 = 24;
-        myTree.insertElement(myInt13, myInt13);
-
-        Integer myInt14 = 88;
-        myTree.insertElement(myInt14, myInt14);
-
-        Integer myInt15 = 1;
-        myTree.insertElement(myInt15, myInt15);
-
-        Integer myInt16 = 97;
-        myTree.insertElement(myInt16, myInt16);
-
-        Integer myInt17 = 94;
-        myTree.insertElement(myInt17, myInt17);
-
-        Integer myInt18 = 35;
-        myTree.insertElement(myInt18, myInt18);
-
-        Integer myInt19 = 51;
-        myTree.insertElement(myInt19, myInt19);
-
-        myTree.printAllElements();
-        System.out.println("done");
-
-        myTree = new TwoFourTree(myComp);*/
-        final int TEST_SIZE = 11;
+        myTree = new TwoFourTree(myComp);
+        final int TEST_SIZE = 10000;
 
 
         for (int i = 0; i < TEST_SIZE; i++) {
             myTree.insertElement(1,1);
-                      myTree.printAllElements();
+                      //myTree.printAllElements();
                      myTree.checkTree();
         }
         
@@ -488,6 +365,56 @@ public class TwoFourTree implements Dictionary {
             ++i;
             myTree.checkTree();
         }*/
+    
+        Comparator myCompTest = new IntegerComparator();
+        TwoFourTree myTreeTest = new TwoFourTree(myCompTest);
+        myTreeTest = new TwoFourTree(myCompTest);
+
+        final int TEST_SIZE_OFFICIAL = 10000;
+        final int TEST_RANGE_OFFICIAL = 1000;
+
+        Random rand = new Random(12345);
+
+        System.out.println("==================================");
+        System.out.println("==================================");
+        System.out.println("========= ADDING =================");
+        System.out.println("==================================");
+        System.out.println("==================================");
+        for (int i = 0; i < TEST_SIZE_OFFICIAL; i++) {
+            int randInt = rand.nextInt(TEST_RANGE_OFFICIAL);
+            myTreeTest.insertElement(randInt, randInt);
+            System.out.println("=== Inserted " + randInt);
+            if (myTreeTest.size() < 50)
+            {
+                myTreeTest.printAllElements();
+            }
+            myTreeTest.checkTree();
+        }
+
+        System.out.println("==================================");
+        System.out.println("==================================");
+        System.out.println("========= REMOVING ===============");
+        System.out.println("==================================");
+        System.out.println("==================================");
+
+        rand = new Random(12345);
+        for (int i = 0; i < TEST_SIZE_OFFICIAL; i++) {
+            int randInt = rand.nextInt(TEST_RANGE_OFFICIAL);
+            int out = (Integer) myTreeTest.removeElement(randInt);
+            System.out.println("=== Removed " + randInt);
+            if (myTreeTest.size() < 50)
+            {
+                myTreeTest.printAllElements();
+            }
+
+            if (out != randInt) {
+                throw new TwoFourTreeException("main: wrong element removed");
+            }
+
+            myTreeTest.checkTree();
+        }
+
+        System.out.println("done");
     }
 
     public void printAllElements() {
