@@ -47,7 +47,7 @@ public class TwoFourTree implements Dictionary {
     public boolean isEmpty() {
         return (size == 0);
     }
-    
+   
     /**
      * 
      * @param key
@@ -60,9 +60,10 @@ public class TwoFourTree implements Dictionary {
         while(true){//stops, if the tree is finite in length
             int i = 0;
             //find the index of the desired child
-            while(i < temp.getNumItems() && treeComp.isGreaterThan(key, (temp.getItem(i)).key())){
+            while(i < temp.getNumItems() && 
+                    treeComp.isGreaterThan(key, (temp.getItem(i)).key())) {
                 ++i;
-                }
+            }           
             //if we encounter the desired key
             if(i < temp.getNumItems() && treeComp.isEqual(key, (temp.getItem(i)).key())){
                 //we care about the ith Item of temp
@@ -72,8 +73,14 @@ public class TwoFourTree implements Dictionary {
                 //the data would be the ith child of temp, if it existed in the tree
                 return new TFNodeIndex(temp, i, false);
             }
+            if (temp.getChild(i) == null) {
+                return new TFNodeIndex(temp, i, true);
+            }
+            
             temp = temp.getChild(i);
+            
         }
+
     }
     
     /**
