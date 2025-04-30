@@ -52,10 +52,12 @@ public class TwoFourTree implements Dictionary {
      * 
      * @param key
      * @return TFNodeIndex. Either returns parent of desired node or the desired node depending
-     * on whether the key exists in the tree or not. This function assumes that the
-     * tree is nonempty.
+     * on whether the key exists in the tree or not. Returns null if the tree is empty.
      */
     private TFNodeIndex find (Object key) {
+        if(isEmpty()){
+            return null;
+        }
         TFNode temp = treeRoot;
         while(true){//stops, if the tree is finite in length
             int i = 0;
@@ -140,7 +142,7 @@ public class TwoFourTree implements Dictionary {
             temp = temp.getChild(0);
         }
         temp.insertItem(0, new Item(key, element));
-        
+        ++size;
         //balancing the tree
         while(temp != null && temp.getNumItems() > temp.getMaxItems()){
             temp = split(temp);
@@ -211,6 +213,7 @@ public class TwoFourTree implements Dictionary {
         Item result = ((theNode.node).getItem(theNode.index));
         if(size == 1){
             treeRoot = null;
+            --size;
             return result.element();
         }
         
@@ -447,8 +450,8 @@ public class TwoFourTree implements Dictionary {
 
         myTree.printAllElements();
         System.out.println("done");
-*/
-        myTree = new TwoFourTree(myComp);
+
+        myTree = new TwoFourTree(myComp);*/
         final int TEST_SIZE = 10000;
 
 
@@ -461,8 +464,8 @@ public class TwoFourTree implements Dictionary {
         System.out.println("removing");
         for (int i = 0; i < TEST_SIZE; i++) {
             //System.out.println("removing " + i);
-            int out = (Integer) myTree.removeElement(new Integer(i));
-            if (out != i) {
+            int out = (Integer) myTree.removeElement(new Integer(1));
+            if (out != 1) {
                 throw new TwoFourTreeException("main: wrong element removed");
             }
             if (i > TEST_SIZE -15  ) {
@@ -470,6 +473,19 @@ public class TwoFourTree implements Dictionary {
             }
         }
         System.out.println("done");
+
+    /*    for(int i = 0; i < 255; ++i){ 
+            myTree.insertElement(1,1);
+            System.out.println(myTree.size);
+        }
+        myTree.printAllElements();
+        int i = 0;
+        while(myTree.treeRoot != null){
+            System.out.println(i + " " + myTree.size());
+            myTree.removeElement(1);
+            ++i;
+            myTree.checkTree();
+        }*/
     }
 
     public void printAllElements() {
