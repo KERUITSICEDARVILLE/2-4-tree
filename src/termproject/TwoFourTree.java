@@ -112,31 +112,42 @@ public class TwoFourTree implements Dictionary {
             return;
         }
         TFNodeIndex theNode = find(key);
-        if(!theNode.hasItem){//if key is not already in the tree
+        TFNode temp = theNode.node;
+        if(!theNode.hasItem){//if key is not already in the tree. Then we are at an external node
             (theNode.node).insertItem(theNode.index, new Item(key, element));
-            (theNode.node).setChild(theNode.index, null);//might not be necessary
+            ++size;
             //balancing the tree
-            TFNode temp = theNode.node;
-            while(temp != null){
+            while(temp != null && temp.getNumItems() > temp.getMaxItems()){
                 temp = split(temp);
             }
             return;
         }
         //otherwise, the key is duplicate.
-        TFNode temp = theNode.node;
-        temp = temp.getChild(theNode.index +1);//logic might be wrong here.
-        //we want the "right child" of the item we found.
+
         
+        if(temp.getChild(theNode.index + 1) == null){//there is no node at the desired location
+            //only happens at an external node
+           temp.insertItem(theNode.index + 1, new Item(key, element));
+           ++size;
+           //balancing the tree
+            while(temp != null && temp.getNumItems() > temp.getMaxItems()){
+                temp = split(temp);
+            }
+            return;
+        }
+        
+        //otherwise, there is a child at the desired location
+        temp = temp.getChild(theNode.index + 1);
         //left child all the way down, to get to the in-order successor
         while(temp.getChild(0) != null){
             temp = temp.getChild(0);
         }
         temp.insertItem(0, new Item(key, element));
-            //balancing the tree. we could probably reorganize so this is written only once
-            TFNode temp2 = theNode.node;
-            while(temp2 != null){
-                temp2 = split(temp2);
-            }
+        
+        //balancing the tree
+        while(temp != null && temp.getNumItems() > temp.getMaxItems()){
+            temp = split(temp);
+        }
     }
     
     /**
@@ -158,7 +169,8 @@ public class TwoFourTree implements Dictionary {
              right.setChild(0, badNode.getChild(3));
             (right.getChild(0)).setParent(right);
         }
-        if(badNode.getChild(4) != null){
+        if(badNode.getChild(4) != null){//should be an equivalent condition to
+            //the previous, since all external nodes are the same depth
             right.setChild(1, badNode.getChild(4));
             (right.getChild(1)).setParent(right);
         }
@@ -172,12 +184,11 @@ public class TwoFourTree implements Dictionary {
         }
         else{
             int i = 0;//index of badNode in its Parent's child array
-            while(i < (badNode.getParent()).getNumItems() &&
-                    treeComp.isGreaterThan((badNode.getItem(0)).key(), ((badNode.getParent()).getItem(i)).key())){
+            while(((badNode.getParent()).getChild(i)) != badNode){
                 ++i;
-                }
-            badNode.getParent().insertItem(i, badNode.getItem(2));
-            badNode.getParent().setChild(i + 1, right);
+            }
+            (badNode.getParent()).insertItem(i, badNode.getItem(2));
+            (badNode.getParent()).setChild(i + 1, right);
             right.setParent(badNode.getParent());
         }
         badNode.deleteItem(3);
@@ -210,10 +221,77 @@ public class TwoFourTree implements Dictionary {
         Comparator myComp = new IntegerComparator();
         TwoFourTree myTree = new TwoFourTree(myComp);
 
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        myTree.insertElement(12, 12);
+        
         Integer myInt1 = 47;
         myTree.insertElement(myInt1, myInt1);
+
         Integer myInt2 = 83;
         myTree.insertElement(myInt2, myInt2);
+
         Integer myInt3 = 22;
         myTree.insertElement(myInt3, myInt3);
 
@@ -231,7 +309,7 @@ public class TwoFourTree implements Dictionary {
 
         Integer myInt8 = 3;
         myTree.insertElement(myInt8, myInt8);
-
+       
         Integer myInt9 = 53;
         myTree.insertElement(myInt9, myInt9);
 
