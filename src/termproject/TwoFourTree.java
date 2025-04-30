@@ -308,7 +308,7 @@ public class TwoFourTree implements Dictionary {
                 }
             }
             else{
-                //we know left fusion is possible, now
+                //we know left fusion is possible
                 leftSib.insertItem(leftSib.getNumItems(), parent.getItem(i-1));
                 parent.deleteItem(i-1);
                 
@@ -346,7 +346,7 @@ public class TwoFourTree implements Dictionary {
             if (out != 1) {
                 throw new TwoFourTreeException("main: wrong element removed");
             }
-            if (i > TEST_SIZE -15  ) {
+            if (i > TEST_SIZE -15) {
                 myTree.printAllElements();
             }
         }
@@ -363,11 +363,11 @@ public class TwoFourTree implements Dictionary {
             myTree.removeElement(1);
             ++i;
             myTree.checkTree();
-        }*/
+        }
+        */
     
         Comparator myCompTest = new IntegerComparator();
         TwoFourTree myTreeTest = new TwoFourTree(myCompTest);
-        myTreeTest = new TwoFourTree(myCompTest);
 
         final int TEST_SIZE_OFFICIAL = 10000;
         final int TEST_RANGE_OFFICIAL = 1000;
